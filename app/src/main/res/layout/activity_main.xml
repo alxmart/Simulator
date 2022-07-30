@@ -32,6 +32,6 @@
         android:contentDescription="@string/txt_simulate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_simulate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
