@@ -19,8 +19,28 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setupMatchesList();
+        
+        setupMatchesRefresh();
 
+        setupFloatingActionButton();
 
+    }
+
+    private void setupMatchesList() {
+
+        // TODO listar as partidas consumindo a nossa API
+
+    }
+
+    private void setupMatchesRefresh() {
+
+        // TODO Atualizar as partidas no Swipe
+    }
+
+    private void setupFloatingActionButton() {
+
+        // TODO: Criar evento para click e simular partidas
 
 
     }
