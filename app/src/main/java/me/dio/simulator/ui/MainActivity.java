@@ -1,6 +1,7 @@
 package me.dio.simulator.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     List<Match> matches = response.body();
+                    Log.i("SIMULATOR",
+                            "Tudo OK, funcionou! Qtd partidas: " +
+                            matches.size());
                 } else {
                     showErrorMessage();
                 }
