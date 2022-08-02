@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.dio.simulator.databinding.ActivityMainBinding;
+import me.dio.simulator.domain.Team;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
+
 
     }
 }
