@@ -41,11 +41,10 @@ public class MainActivity extends AppCompatActivity {
         setupMatchesList();
         setupMatchesRefresh();
         setupFloatingActionButton();
-
     }
 
     private void setupHttpClient() {
-    // Tudo que o Retrofit precisa para funcionar
+        // Tudo que o Retrofit precisa para funcionar
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://alxmart.github.io/matches-simulator-api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -55,16 +54,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupMatchesList() {
-
         binding.rvMatches.setHasFixedSize(true);
         binding.rvMatches.setLayoutManager(new LinearLayoutManager(this));
+        findMatchesFromApi();
+    }
 
+    private void setupMatchesRefresh() {
+        binding.srlMatches.setOnRefreshListener(this::findMatchesFromApi);
+    }
 
+    private void setupFloatingActionButton() {
+        // TODO: Criar evento para click e simular partidas
+    }
+
+    private void showErrorMessage() {
+        Snackbar.make(binding.fabSimulate, R.string.error_api, Snackbar.LENGTH_LONG).show();
+    }
+
+    private void findMatchesFromApi() {
+        binding.srlMatches.setRefreshing(true);
         //  listar as partidas consumindo a nossa API
         matchesAPI.getMatches().enqueue(new Callback<List<Match>>() {
             @Override
             public void onResponse(Call<List<Match>> call, Response<List<Match>> response) {
-
                 if (response.isSuccessful()) {
                     List<Match> matches = response.body();
                     matchesAdapter = new MatchesAdapter(matches);
@@ -75,34 +87,18 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     showErrorMessage();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<Match>> call, Throwable t) {
-                showErrorMessage();
-            }
+                    binding.srlMatches.setRefreshing(false);
+                }
 
-        });
+                @Override
+                public void onFailure (Call < List < Match >> call, Throwable t){
+                    showErrorMessage();
+                    binding.srlMatches.setRefreshing(false);
+                }
 
-    }
-
-
-    private void setupMatchesRefresh() {
-
-        // TODO Atualizar as partidas no Swipe
-    }
-
-    private void setupFloatingActionButton() {
-
-        // TODO: Criar evento para click e simular partidas
-
-
-    }
-
-    private void showErrorMessage() {
-       Snackbar.make(binding.fabSimulate, R.string.error_api, Snackbar.LENGTH_LONG).show();
-    }
-
-
-
+            });
+        } ;
 }
+
+
